@@ -5,14 +5,9 @@ import sys
 import pygame
 
 from agent import Agent
+import colortable
 import steering
 from util import vector
-
-BLACK = 0, 0, 0
-RED = 255, 0, 0
-GREEN = 0, 255, 0
-BLUE = 0, 0, 255
-WHITE = 255, 255, 255
 
 TARGET_SHAPE = [vector(-5, 0), vector(0, -5), vector(5, 0), vector(0, 5)]
 
@@ -46,7 +41,7 @@ def main():
     pygame.init()
 
     screen = pygame.display.set_mode(simulation.size)
-    screen.fill(BLACK)
+    screen.fill(colortable.background())
     clock = pygame.time.Clock()
 
     target = vector(simulation.size[0], simulation.size[1]) / 2
@@ -71,9 +66,9 @@ def main():
             agent.update(frame_time)
 
         # draw
-        screen.fill(BLACK)
+        screen.fill(colortable.background())
 
-        pygame.draw.lines(screen, GREEN, True, target_poly)
+        pygame.draw.lines(screen, colortable.target(), True, target_poly)
 
         for agent in simulation.agents:
             agent.draw(screen, frame_time)

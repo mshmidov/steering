@@ -3,7 +3,7 @@ from pygame.math import Vector2
 from pygame.rect import Rect
 from pygame.sprite import Sprite
 
-from colors import WHITE, BLUE
+import colortable
 from shape import Shape
 from util import vector, frame
 
@@ -44,5 +44,5 @@ class Agent(AbstractAgent):
         self.shape, self.collision_rect = self.__align_to_velocity__()
 
     def draw(self, surface, frame_time):
-        return [draw.aalines(surface, WHITE, True, self.shape),
-                self.__draw_vector__(surface, self.velocity, BLUE, frame_time)]
+        return [draw.aalines(surface, colortable.agent(), True, self.shape),
+                self.__draw_vector__(surface, self.velocity, colortable.velocity(), frame_time)]
