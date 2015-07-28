@@ -3,7 +3,6 @@ import random
 import sys
 
 import pygame
-from pygame.math import Vector2
 
 from agent import Agent
 import steering
@@ -15,7 +14,6 @@ GREEN = 0, 255, 0
 BLUE = 0, 0, 255
 WHITE = 255, 255, 255
 
-AGENT_SHAPE = [vector(0, 0), vector(-3, -10), vector(3, -10)]
 TARGET_SHAPE = [vector(-5, 0), vector(0, -5), vector(5, 0), vector(0, 5)]
 
 BASIS_X = vector(1, 0)
@@ -38,22 +36,6 @@ class Simulation(object):
         r = agent.vision ** 2
         return [other_agent for other_agent in self.agents if
                 agent.position.distance_squared_to(other_agent.position) <= r]
-
-
-def agent_poly(agent: Agent):
-    angle = -agent.velocity.angle_to(BASIS_Y)
-
-    return [point.rotate(angle) + agent.position for point in AGENT_SHAPE]
-
-
-def draw_agent(agent: Agent, screen):
-    # agent itself
-    poly = agent_poly(agent)
-    return pygame.draw.lines(screen, WHITE, True, poly)
-
-
-def draw_agent_vector(agent: Agent, v: Vector2, color, frame_time, screen):
-    pygame.draw.aaline(screen, color, agent.position, agent.position + v * (1 / frame_time))
 
 
 def main():
@@ -83,16 +65,18 @@ def main():
                 target = vector(event.pos[0], event.pos[1])
                 target_poly = [target + point for point in TARGET_SHAPE]
 
+        # update
         for agent in simulation.agents:
             steering.seek(agent, target, frame_time)
+            agent.update(frame_time)
 
+        # draw
         screen.fill(BLACK)
 
         pygame.draw.lines(screen, GREEN, True, target_poly)
 
         for agent in simulation.agents:
-            draw_agent(agent, screen)
-            draw_agent_vector(agent, agent.velocity, BLUE, frame_time, screen)
+            agent.draw(screen, frame_time)
 
         pygame.display.flip()
 

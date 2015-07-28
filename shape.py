@@ -6,15 +6,15 @@ from util import vector
 class Shape(Mapping):
     def __init__(self, polyline):
         self.angle = dict()
-        self.angle[0] = [vector(point) for point in polyline]
+        self.angle[0] = [vector(*point) for point in polyline]
 
     def __len__(self):
         return 359
 
     def __getitem__(self, key):
         key = round(key)
-        if key < 0 or key >= 360:
-            raise ValueError("Key should be from 0 to 359 degrees")
+        if key <= -360 or key >= 360:
+            raise ValueError("Key should be from -359 to 359 degrees")
 
         if key not in self.angle.keys():
             self.angle[key] = self._rotate(key)
