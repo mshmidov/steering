@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import random
 import sys
-from math import radians
 
 import pygame
 from pygame.math import Vector2
