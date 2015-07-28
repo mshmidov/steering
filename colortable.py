@@ -2,16 +2,16 @@ from pygame import Color
 
 
 def background():
-    Color('black')
+    return Color('black')
 
 
 def agent():
-    Color('white')
+    return Color('white')
 
 
 def velocity():
-    Color('blue')
+    return Color('blue')
 
 
 def target():
-    Color('green')
+    return Color('green')
