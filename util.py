@@ -11,6 +11,7 @@ def vector(x, y) -> Vector2:
 def normalize(v: Vector2) -> Vector2:
     return v.normalize() if v.length_squared() > 0 else v
 
+
 def truncate(v: Vector2, l) -> Vector2:
     return v.normalize() * l if v.length() > l else v
 

@@ -5,8 +5,8 @@ from util import normalize
 
 
 def seek(agent: Agent, frame_time, target: Vector2):
-    max_speed = agent.max_speed * frame_time
+    locomotion = agent.locomotion * frame_time
 
-    desired_velocity = normalize(target - agent.position) * max_speed
+    desired_velocity = normalize(target - agent.position) * locomotion.max_speed
 
     return desired_velocity
