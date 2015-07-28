@@ -1,18 +1,12 @@
 from pygame.math import Vector2
 
 from agent import Agent
-from util import truncate, normalize
+from util import normalize
 
 
-def seek(agent: Agent, target: Vector2, frame_time):
+def seek(agent: Agent, frame_time, target: Vector2):
     max_speed = agent.max_speed * frame_time
-    max_force = agent.max_force * frame_time
 
     desired_velocity = normalize(target - agent.position) * max_speed
-
-    steering_force = truncate(desired_velocity - agent.velocity, max_force)
-    agent.velocity = truncate(agent.velocity + steering_force, max_speed)
-
-    agent.position = agent.position + agent.velocity
 
     return desired_velocity

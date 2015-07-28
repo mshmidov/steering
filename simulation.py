@@ -61,9 +61,9 @@ def main():
                 target_poly = [target + point for point in TARGET_SHAPE]
 
         # update
+        seek = lambda a, f: steering.seek(a, f, target)
         for agent in simulation.agents:
-            steering.seek(agent, target, frame_time)
-            agent.update(frame_time)
+            agent.update(frame_time, seek)
 
         # draw
         screen.fill(colortable.background())

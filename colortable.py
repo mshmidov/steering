@@ -12,6 +12,8 @@ def agent():
 def velocity():
     return Color('blue')
 
+def desired_velocity():
+    return Color('cyan')
 
 def target():
     return Color('green')
