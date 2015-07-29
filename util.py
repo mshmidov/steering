@@ -29,3 +29,40 @@ def frame(points) -> Rect:
         max_y = max(max_y, y)
 
     return Rect(min_x, min_y, max_x - min_x, max_y - min_y)
+
+
+def full_angle(a):
+    """
+    Polar angle of Vector2 is measured relative to X axis. It it 0 to 180 clockwise and 0 to -180 counterclockwise.
+      This function converts it to 0 to 360 (exclusive) clockwise angle
+    """
+    return a if a >= 0 else 360 + a
+
+
+def half_angle(a):
+    """
+    This function does the reverse of full_angle()
+    """
+    return a if a <= 180 else a - 360
+
+
+def angle_between(a: Vector2, o: Vector2, b: Vector2):
+    """
+    Calculates angle AOB in degrees, clockwise
+    """
+    angle_a = full_angle((a - o).as_polar()[1])
+    angle_b = full_angle((b - o).as_polar()[1])
+    return full_angle(angle_b - angle_a)
+
+
+def angle_between_relative(a: Vector2, b: Vector2):
+    """
+    Calculates angle AOB in degrees, clockwise
+    """
+    angle_a = full_angle(a.as_polar()[1])
+    angle_b = full_angle(b.as_polar()[1])
+    return full_angle(angle_b - angle_a)
+
+
+def sign(x):
+    return 1 if x > 0 else -1 if x < 0 else 0
