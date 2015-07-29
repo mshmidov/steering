@@ -25,7 +25,7 @@ class Simulation(object):
     def populate(self, count=10):
         for i in range(count):
             position = vector(random.randrange(0, self.width - 1), random.randrange(0, self.height - 1))
-            self.agents.append(Agent(position, vector(0, 0)))
+            self.agents.append(Agent(position))
 
     def visible_agents(self, agent: Agent):
         r = agent.vision ** 2
